@@ -33,13 +33,13 @@ public class HostelController {
     }
 
     @GetMapping("/hostel/{id}")
-    public ResponseEntity<Optional<Hostel>> findBusiness(@PathVariable Long id) {
+    public ResponseEntity<Optional<Hostel>> findHostel(@PathVariable Long id) {
         Optional<Hostel> h = this.hostelRepo.findById(id);
         return ResponseEntity.ok().body(h);
     }
 
     @DeleteMapping("/hostel/{id}")
-    public ResponseEntity<Optional<Hostel>> deleteBusiness(@PathVariable Long id) {
+    public ResponseEntity<Optional<Hostel>> deleteHostel(@PathVariable Long id) {
         if (hostelRepo.existsById(id)) {
             this.hostelRepo.deleteById(id);
             return ResponseEntity.ok().build();
