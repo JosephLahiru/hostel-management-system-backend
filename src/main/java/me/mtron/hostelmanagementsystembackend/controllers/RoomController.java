@@ -1,6 +1,5 @@
 package me.mtron.hostelmanagementsystembackend.controllers;
 
-import me.mtron.hostelmanagementsystembackend.httpentities.Hostel;
 import me.mtron.hostelmanagementsystembackend.httpentities.Room;
 import me.mtron.hostelmanagementsystembackend.repo.RoomRepo;
 import me.mtron.hostelmanagementsystembackend.service.RoomService;
@@ -34,8 +33,8 @@ public class RoomController {
 
     @GetMapping("/room/{id}")
     public ResponseEntity<Optional<Room>> findRoom(@PathVariable Long id) {
-        Optional<Room> h = this.roomRepo.findById(id);
-        return ResponseEntity.ok().body(h);
+        Optional<Room> r = this.roomRepo.findById(id);
+        return ResponseEntity.ok().body(r);
     }
 
     @DeleteMapping("/room/{id}")
