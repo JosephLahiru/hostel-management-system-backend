@@ -1,0 +1,28 @@
+name: HMS Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: self-hosted
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Stop and remove the old Docker container (if it exists)
+      run: |
+        CONTAINER_ID=$(docker ps -qf "name=hms-backend")
+        if [ -n "$CONTAINER_ID" ]; then
+          docker stop $CONTAINER_ID
+          docker rm $CONTAINER_ID
+        fi
+      continue-on-error: true
+
+    - name: Build the Docker image
+      run: docker build -t hms-backend-image:$(date +%s) .
+
+    - name: Run the new Docker container
+      run: docker run -d -p 80:8080 --name hms-backend hms-backend-image:$(date +%s)
