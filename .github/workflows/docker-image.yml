@@ -22,7 +22,7 @@ jobs:
       continue-on-error: true
 
     - name: Build the Docker image
-      run: sudo docker build -t hms-backend-image:$(date +%s) .
+      run: sudo docker build -t hms-backend-image:latest .
 
     - name: Run the new Docker container
-      run: sudo docker run -d -p 80:8080 --name hms-backend hms-backend-image:$(date +%s)
+      run: sudo docker run -d -p 80:8080 --name hms-backend hms-backend-image:latest
