@@ -1,5 +1,5 @@
-FROM openjdk:21
+FROM openjdk:19
 EXPOSE 8080
-WORKDIR project
-ADD ./target/hostel-management-system-backend-0.0.1-SNAPSHOT.jar /project
-ENTRYPOINT ["java", "-jar", "hostel-management-system-backend-0.0.1-SNAPSHOT.jar", "--type='local'"]
+WORKDIR /app
+COPY ./target/hostel-management-system-backend-0.0.1-SNAPSHOT.jar app.jar
+ENTRYPOINT ["java", "-jar", "app.jar", "--type=local"]
