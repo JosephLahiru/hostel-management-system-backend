@@ -8,4 +8,6 @@ public interface EmployeeService {
     String addEmployee(EmployeeDTO employeeDTO);
 
     LoginMessage loginEmployee(LoginDTO loginDTO);
+
+    boolean emailExists(String email);
 }
