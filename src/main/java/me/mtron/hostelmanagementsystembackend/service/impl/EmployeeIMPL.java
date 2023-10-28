@@ -57,4 +57,9 @@ public class EmployeeIMPL implements EmployeeService {
             return new LoginMessage("Invalid Credentials!", false);
         }
     }
+
+    @Override
+    public boolean emailExists(String email) {
+        return employeeRepo.findByEmail(email) != null;
+    }
 }
