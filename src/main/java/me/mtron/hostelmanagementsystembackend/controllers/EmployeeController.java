@@ -16,7 +16,7 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
-    @PostMapping("/save")
+    @PostMapping("/signup")
     public String saveEmployee(@RequestBody EmployeeDTO employeeDTO){
         String id = employeeService.addEmployee(employeeDTO);
         return id;
