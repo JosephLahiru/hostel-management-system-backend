@@ -2,9 +2,11 @@ package me.mtron.hostelmanagementsystembackend.controllers;
 
 import me.mtron.hostelmanagementsystembackend.DTO.EmployeeDTO;
 import me.mtron.hostelmanagementsystembackend.DTO.LoginDTO;
+import me.mtron.hostelmanagementsystembackend.payload.error.ErrorMessage;
 import me.mtron.hostelmanagementsystembackend.payload.response.LoginMessage;
 import me.mtron.hostelmanagementsystembackend.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,9 +19,13 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     @PostMapping("/signup")
-    public String saveEmployee(@RequestBody EmployeeDTO employeeDTO){
+    public ResponseEntity<?> saveEmployee(@RequestBody EmployeeDTO employeeDTO){
+        if (employeeService.emailExists(employeeDTO.getEmail())) {
+            ErrorMessage errorResponse = new ErrorMessage("Email already exists", HttpStatus.BAD_REQUEST.value());
+            return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+        }
         String id = employeeService.addEmployee(employeeDTO);
-        return id;
+        return ResponseEntity.ok(id);
     }
 
     @PostMapping("/login")
