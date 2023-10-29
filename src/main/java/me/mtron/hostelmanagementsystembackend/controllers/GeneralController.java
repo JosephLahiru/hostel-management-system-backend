@@ -26,9 +26,10 @@ public class GeneralController {
         Map<String, List<Map<String, String>>> response = new HashMap<>();
         List<Map<String, String>> endpoints = new ArrayList<>();
 
+        endpoints.add(addEndpoint("Check Online", "Get", "Endpoint for Checking API status", "/api/", "no"));
+        endpoints.add(addEndpoint("View Endpoints", "Get", "Endpoint for viewing all Endpoints", "/api/endpoints", "no"));
         endpoints.add(addEndpoint("Login", "Post", "Endpoint for user login", "/api/user/login", "yes"));
         endpoints.add(addEndpoint("Signup", "Post", "Endpoint for user signup", "/api/user/signup", "yes"));
-        endpoints.add(addEndpoint("Check Online", "Get", "Endpoint for Checking API status", "/api/hostel", "no"));
         endpoints.add(addEndpoint("Get Hostel", "Get", "Endpoint for get all Hostel information", "/api/hostel", "yes"));
         endpoints.add(addEndpoint("Add Hostel", "Post", "Endpoint for add a Hostel", "/api/hostel", "yes"));
         endpoints.add(addEndpoint("Get Complaint", "Get", "Endpoint for get all Complaint information", "/api/complaint", "yes"));
