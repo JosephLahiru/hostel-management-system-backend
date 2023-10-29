@@ -3,15 +3,15 @@ package me.mtron.hostelmanagementsystembackend.httpentities;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "employee")
-public class Employee {
+@Table(name = "user")
+public class User {
     @Id
-    @Column(name = "employee_id", length = 45)
+    @Column(name = "user_id", length = 45)
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "employee_name", length = 255)
-    private String employeeName;
+    @Column(name = "user_name", length = 255)
+    private String userName;
 
     @Column(name = "email", length = 255)
     private String email;
@@ -19,12 +19,12 @@ public class Employee {
     @Column(name = "password", length = 255)
     private String password;
 
-    public Employee() {
+    public User() {
     }
 
-    public Employee(Long id, String employeeName, String email, String password) {
+    public User(Long id, String userName, String email, String password) {
         this.id = id;
-        this.employeeName = employeeName;
+        this.userName = userName;
         this.email = email;
         this.password = password;
     }
@@ -37,12 +37,12 @@ public class Employee {
         return id;
     }
 
-    public String getEmployeeName() {
-        return employeeName;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setEmployeeName(String employeeName) {
-        this.employeeName = employeeName;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getEmail() {
@@ -63,9 +63,9 @@ public class Employee {
 
     @Override
     public String toString() {
-        return "Employee{" +
+        return "User{" +
                 "id=" + id +
-                ", employeeName='" + employeeName + '\'' +
+                ", userName='" + userName + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 '}';

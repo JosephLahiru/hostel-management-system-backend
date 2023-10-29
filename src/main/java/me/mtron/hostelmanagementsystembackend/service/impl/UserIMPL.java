@@ -1,11 +1,11 @@
 package me.mtron.hostelmanagementsystembackend.service.impl;
 
-import me.mtron.hostelmanagementsystembackend.DTO.EmployeeDTO;
+import me.mtron.hostelmanagementsystembackend.DTO.UserDTO;
 import me.mtron.hostelmanagementsystembackend.DTO.LoginDTO;
-import me.mtron.hostelmanagementsystembackend.httpentities.Employee;
+import me.mtron.hostelmanagementsystembackend.httpentities.User;
 import me.mtron.hostelmanagementsystembackend.payload.response.LoginMessage;
-import me.mtron.hostelmanagementsystembackend.repo.EmployeeRepo;
-import me.mtron.hostelmanagementsystembackend.service.EmployeeService;
+import me.mtron.hostelmanagementsystembackend.repo.UserRepo;
+import me.mtron.hostelmanagementsystembackend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -13,39 +13,39 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class EmployeeIMPL implements EmployeeService {
+public class UserIMPL implements UserService {
 
     @Autowired
-    EmployeeRepo employeeRepo;
+    UserRepo userRepo;
 
     @Autowired
     PasswordEncoder passwordEncoder;
 
     @Override
-    public String addEmployee(EmployeeDTO employeeDTO) {
-        Employee employee = new Employee(
-                employeeDTO.getId(),
-                employeeDTO.getEmployeeName(),
-                employeeDTO.getEmail(),
-                this.passwordEncoder.encode(employeeDTO.getPassword())
+    public String addUser(UserDTO userDTO) {
+        User user = new User(
+                userDTO.getId(),
+                userDTO.getUserName(),
+                userDTO.getEmail(),
+                this.passwordEncoder.encode(userDTO.getPassword())
         );
 
-        employeeRepo.save(employee);
+        userRepo.save(user);
 
-        return employee.getEmployeeName();
+        return user.getUserName();
     }
 
     @Override
-    public LoginMessage loginEmployee(LoginDTO loginDTO) {
+    public LoginMessage loginUser(LoginDTO loginDTO) {
         String msg = "";
-        Employee employee = employeeRepo.findByEmail(loginDTO.getEmail());
-        if(employee!=null){
+        User user = userRepo.findByEmail(loginDTO.getEmail());
+        if(user !=null){
             String password = loginDTO.getPassword();
-            String encodedPassword = employee.getPassword();
+            String encodedPassword = user.getPassword();
             Boolean isPwdCorrect = passwordEncoder.matches(password, encodedPassword);
             if(isPwdCorrect){
-                Optional<Employee> employee1 = employeeRepo.findOneByEmailAndPassword(loginDTO.getEmail(), encodedPassword);
-                if(employee1.isPresent()){
+                Optional<User> user1 = userRepo.findOneByEmailAndPassword(loginDTO.getEmail(), encodedPassword);
+                if(user1.isPresent()){
                     return new LoginMessage("Login Success!", true);
                 }else{
                     return new LoginMessage("Login Failed!", false);
@@ -60,6 +60,6 @@ public class EmployeeIMPL implements EmployeeService {
 
     @Override
     public boolean emailExists(String email) {
-        return employeeRepo.findByEmail(email) != null;
+        return userRepo.findByEmail(email) != null;
     }
 }

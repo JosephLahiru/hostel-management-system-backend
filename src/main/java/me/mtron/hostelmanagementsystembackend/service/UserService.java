@@ -1,13 +1,13 @@
 package me.mtron.hostelmanagementsystembackend.service;
 
-import me.mtron.hostelmanagementsystembackend.DTO.EmployeeDTO;
+import me.mtron.hostelmanagementsystembackend.DTO.UserDTO;
 import me.mtron.hostelmanagementsystembackend.DTO.LoginDTO;
 import me.mtron.hostelmanagementsystembackend.payload.response.LoginMessage;
 
-public interface EmployeeService {
-    String addEmployee(EmployeeDTO employeeDTO);
+public interface UserService {
+    String addUser(UserDTO userDTO);
 
-    LoginMessage loginEmployee(LoginDTO loginDTO);
+    LoginMessage loginUser(LoginDTO loginDTO);
 
     boolean emailExists(String email);
 }

@@ -1,17 +1,17 @@
 package me.mtron.hostelmanagementsystembackend.DTO;
 
-public class EmployeeDTO {
+public class UserDTO {
     private Long id;
-    private String employeeName;
+    private String userName;
     private String email;
     private String password;
 
-    public EmployeeDTO() {
+    public UserDTO() {
     }
 
-    public EmployeeDTO(Long id, String employeeName, String email, String password) {
+    public UserDTO(Long id, String userName, String email, String password) {
         this.id = id;
-        this.employeeName = employeeName;
+        this.userName = userName;
         this.email = email;
         this.password = password;
     }
@@ -24,12 +24,12 @@ public class EmployeeDTO {
         this.id = id;
     }
 
-    public String getEmployeeName() {
-        return employeeName;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setEmployeeName(String employeeName) {
-        this.employeeName = employeeName;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getEmail() {
@@ -50,9 +50,9 @@ public class EmployeeDTO {
 
     @Override
     public String toString() {
-        return "EmployeeDTO{" +
+        return "UserDTO{" +
                 "id=" + id +
-                ", employeeName='" + employeeName + '\'' +
+                ", userName='" + userName + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 '}';
