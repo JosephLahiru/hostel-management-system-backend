@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.*;
 
 @RestController
-@CrossOrigin
+@CrossOrigin("*")
 @RequestMapping("/api")
 public class GeneralController {
     @GetMapping(path = "/", produces = MediaType.APPLICATION_JSON_VALUE)
