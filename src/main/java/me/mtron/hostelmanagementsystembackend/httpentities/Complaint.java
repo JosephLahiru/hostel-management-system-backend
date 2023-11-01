@@ -1,8 +1,8 @@
 package me.mtron.hostelmanagementsystembackend.httpentities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.Date;
 
 @Entity
 public class Complaint {
@@ -15,6 +15,11 @@ public class Complaint {
     private int room_no;
     private String stu_no;
     private String image_url;
+    private String status;
+
+    @Column(name = "created_at")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdAt;
 
     public void setId(Long id) {
         this.id = id;
@@ -62,5 +67,21 @@ public class Complaint {
 
     public void setImage_url(String image_url) {
         this.image_url = image_url;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 }
