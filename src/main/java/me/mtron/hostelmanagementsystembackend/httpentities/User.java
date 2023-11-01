@@ -2,6 +2,8 @@ package me.mtron.hostelmanagementsystembackend.httpentities;
 
 import jakarta.persistence.*;
 
+import java.util.Date;
+
 @Entity
 @Table(name = "user")
 public class User {
@@ -19,14 +21,19 @@ public class User {
     @Column(name = "password", length = 255)
     private String password;
 
+    @Column(name = "created_at")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdAt;
+
     public User() {
     }
 
-    public User(Long id, String username, String email, String password) {
+    public User(Long id, String username, String email, String password, Date createdAt) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
+        this.createdAt = createdAt;
     }
 
     public void setId(Long id) {
@@ -59,6 +66,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
     @Override
