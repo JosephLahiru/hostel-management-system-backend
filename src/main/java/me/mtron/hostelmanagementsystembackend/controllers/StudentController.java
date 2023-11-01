@@ -1,6 +1,8 @@
 package me.mtron.hostelmanagementsystembackend.controllers;
 
 import me.mtron.hostelmanagementsystembackend.httpentities.Student;
+import me.mtron.hostelmanagementsystembackend.models.StudentRoom;
+import me.mtron.hostelmanagementsystembackend.projection.StudentRoomProjection;
 import me.mtron.hostelmanagementsystembackend.repo.StudentRepo;
 import me.mtron.hostelmanagementsystembackend.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,4 +49,18 @@ public class StudentController {
         }
         return ResponseEntity.status(400).build();
     }
+
+    @GetMapping("/studentRoom/{propertyId}")
+    public ResponseEntity<List<StudentRoom>> getStudentRoomsByPropertyId(@PathVariable String propertyId) {
+        List<StudentRoomProjection> projections = studentRepo.findStudentRoomByPropertyId(propertyId);
+        List<StudentRoom> rooms = new ArrayList<>();
+        for(StudentRoomProjection projection : projections) {
+            StudentRoom room = new StudentRoom();
+            room.setRegNumber(projection.getRegNumber());
+            room.setRoomNumber(projection.getRoomNumber());
+            rooms.add(room);
+        }
+        return ResponseEntity.ok(rooms);
+    }
+
 }
