@@ -1,8 +1,8 @@
 package me.mtron.hostelmanagementsystembackend.httpentities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.Date;
 
 @Entity
 public class Property {
@@ -12,6 +12,9 @@ public class Property {
     private String prop_id;
     private String prop_name;
     private String status;
+    @Column(name = "created_at")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdAt;
 
     public void setId(Long id) {
         this.id = id;
@@ -43,5 +46,13 @@ public class Property {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 }
