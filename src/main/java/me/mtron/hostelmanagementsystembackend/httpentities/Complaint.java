@@ -15,11 +15,16 @@ public class Complaint {
     private int room_no;
     private String stu_no;
     private String image_url;
-    private String status;
-
+    @Column(name = "status", nullable = false, columnDefinition = "varchar(255) default 'pending'")
+    private String status = "pending";
     @Column(name = "created_at")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date createdAt;
+    private Date created_at;
+
+    @PrePersist
+    public void prePersist() {
+        this.created_at = new Date();
+    }
 
     public void setId(Long id) {
         this.id = id;
@@ -77,11 +82,11 @@ public class Complaint {
         this.status = status;
     }
 
-    public Date getCreatedAt() {
-        return createdAt;
+    public Date getCreated_at() {
+        return created_at;
     }
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
+    public void setCreated_at(Date created_at) {
+        this.created_at = created_at;
     }
 }
