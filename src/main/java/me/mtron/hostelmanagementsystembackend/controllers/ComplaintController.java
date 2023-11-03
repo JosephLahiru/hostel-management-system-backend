@@ -69,6 +69,16 @@ public class ComplaintController {
     @GetMapping("/daily_report")
     public ResponseEntity<List<DailyReport>> getDailyReport() {
         List<DailyReportProjection> projections = complaintRepo.getDailyReport();
+        return getListResponseEntity(projections);
+    }
+
+    @GetMapping("/monthly_report")
+    public ResponseEntity<List<DailyReport>> getMonthlyReport() {
+        List<DailyReportProjection> projections = complaintRepo.getMonthlyReport();
+        return getListResponseEntity(projections);
+    }
+
+    private ResponseEntity<List<DailyReport>> getListResponseEntity(List<DailyReportProjection> projections) {
         List<DailyReport> reports = new ArrayList<>();
         for(DailyReportProjection projection : projections) {
             DailyReport report = new DailyReport();
