@@ -53,6 +53,19 @@ public class ComplaintController {
         return ResponseEntity.status(400).build();
     }
 
+    @PutMapping("/complaint/{id}")
+    public ResponseEntity<Complaint> resolveComplaint(@PathVariable Long id) {
+        Optional<Complaint> complaintOptional = this.complaintRepo.findById(id);
+        if(complaintOptional.isPresent()) {
+            Complaint complaint = complaintOptional.get();
+            complaint.setStatus("resolved");
+            this.complaintRepo.save(complaint);
+            return ResponseEntity.ok().body(complaint);
+        } else {
+            return ResponseEntity.status(404).build();
+        }
+    }
+
     @GetMapping("/daily_report")
     public ResponseEntity<List<DailyReport>> getDailyReport() {
         List<DailyReportProjection> projections = complaintRepo.getDailyReport();
