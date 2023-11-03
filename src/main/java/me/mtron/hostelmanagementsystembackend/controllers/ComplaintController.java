@@ -2,9 +2,7 @@ package me.mtron.hostelmanagementsystembackend.controllers;
 
 import me.mtron.hostelmanagementsystembackend.httpentities.Complaint;
 import me.mtron.hostelmanagementsystembackend.models.DailyReport;
-import me.mtron.hostelmanagementsystembackend.models.StudentRoom;
 import me.mtron.hostelmanagementsystembackend.projection.DailyReportProjection;
-import me.mtron.hostelmanagementsystembackend.projection.StudentRoomProjection;
 import me.mtron.hostelmanagementsystembackend.repo.ComplaintRepo;
 import me.mtron.hostelmanagementsystembackend.service.ComplaintService;
 import org.springframework.beans.factory.annotation.Autowired;
