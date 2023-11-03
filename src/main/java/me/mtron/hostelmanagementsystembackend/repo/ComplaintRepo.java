@@ -10,4 +10,7 @@ import java.util.List;
 public interface ComplaintRepo extends JpaRepository<Complaint, Long> {
     @Query(value = "SELECT * FROM daily_report_view;", nativeQuery = true)
     List<DailyReportProjection> getDailyReport();
+
+    @Query(value = "SELECT * FROM monthly_report_view;", nativeQuery = true)
+    List<DailyReportProjection> getMonthlyReport();
 }
