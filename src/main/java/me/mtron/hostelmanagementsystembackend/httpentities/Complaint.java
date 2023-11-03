@@ -2,6 +2,8 @@ package me.mtron.hostelmanagementsystembackend.httpentities;
 
 import jakarta.persistence.*;
 
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.util.Date;
 
 @Entity
@@ -18,14 +20,13 @@ public class Complaint {
     @Column(name = "status", nullable = false, columnDefinition = "varchar(255) default 'pending'")
     private String status = "pending";
     @Column(name = "created_at")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date created_at;
+    private OffsetDateTime created_at;
 
     @PrePersist
     public void prePersist() {
-        this.created_at = new Date();
+        ZoneOffset zoneOffset = ZoneOffset.of("+05:30");
+        this.created_at = OffsetDateTime.now(zoneOffset);
     }
-
     public void setId(Long id) {
         this.id = id;
     }
@@ -82,11 +83,11 @@ public class Complaint {
         this.status = status;
     }
 
-    public Date getCreated_at() {
+    public OffsetDateTime getCreated_at() {
         return created_at;
     }
 
-    public void setCreated_at(Date created_at) {
+    public void setCreated_at(OffsetDateTime created_at) {
         this.created_at = created_at;
     }
 }
