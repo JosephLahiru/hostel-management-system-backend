@@ -2,6 +2,7 @@ package me.mtron.hostelmanagementsystembackend.httpentities;
 
 import jakarta.persistence.*;
 
+import java.util.Calendar;
 import java.util.Date;
 
 @Entity
@@ -15,7 +16,16 @@ public class Room {
     private String hostel_type;
     @Column(name = "created_at")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date createdAt;
+    private Date created_at;
+
+    @PrePersist
+    public void prePersist() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        calendar.add(Calendar.HOUR, 5);
+        calendar.add(Calendar.MINUTE, 30);
+        this.created_at = calendar.getTime();
+    }
 
     public void setId(Long id) {
         this.id = id;
@@ -57,11 +67,11 @@ public class Room {
         this.hostel_type = hostel_type;
     }
 
-    public Date getCreatedAt() {
-        return createdAt;
+    public Date getCreated_at() {
+        return created_at;
     }
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
+    public void setCreated_at(Date created_at) {
+        this.created_at = created_at;
     }
 }
