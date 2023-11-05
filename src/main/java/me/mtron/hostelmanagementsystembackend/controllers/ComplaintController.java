@@ -2,7 +2,11 @@ package me.mtron.hostelmanagementsystembackend.controllers;
 
 import me.mtron.hostelmanagementsystembackend.httpentities.Complaint;
 import me.mtron.hostelmanagementsystembackend.models.DailyReport;
+import me.mtron.hostelmanagementsystembackend.models.TopComplainedItems;
+import me.mtron.hostelmanagementsystembackend.models.TopComplainedRooms;
 import me.mtron.hostelmanagementsystembackend.projection.DailyReportProjection;
+import me.mtron.hostelmanagementsystembackend.projection.TopComplainedItemsProjection;
+import me.mtron.hostelmanagementsystembackend.projection.TopComplainedRoomsProjection;
 import me.mtron.hostelmanagementsystembackend.repo.ComplaintRepo;
 import me.mtron.hostelmanagementsystembackend.service.ComplaintService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,5 +98,34 @@ public class ComplaintController {
             reports.add(report);
         }
         return ResponseEntity.ok(reports);
+    }
+
+    @GetMapping("/top_complained_rooms")
+    public ResponseEntity<List<TopComplainedRooms>> getTopComplainedRooms() {
+        List<TopComplainedRoomsProjection> projections = complaintRepo.getRoomComplaints();
+
+        List<TopComplainedRooms> complaints = new ArrayList<>();
+        for(TopComplainedRoomsProjection projection : projections) {
+            TopComplainedRooms complaint = new TopComplainedRooms();
+            complaint.setComplaint_count(projection.getComplaint_count());
+            complaint.setRoom_no(projection.getRoom_no());
+            complaints.add(complaint);
+        }
+        return ResponseEntity.ok(complaints);
+    }
+
+    @GetMapping("/top_complained_item")
+    public ResponseEntity<List<TopComplainedItems>> getTopComplainedItems() {
+        List<TopComplainedItemsProjection> projections = complaintRepo.getItemComplaints();
+
+        List<TopComplainedItems> complaints = new ArrayList<>();
+        for(TopComplainedItemsProjection projection : projections) {
+            TopComplainedItems complaint = new TopComplainedItems();
+            complaint.setComplaint_count(projection.getComplaint_count());
+            complaint.setProp_name(projection.getProp_name());
+            complaint.setItem_code(projection.getItem_code());
+            complaints.add(complaint);
+        }
+        return ResponseEntity.ok(complaints);
     }
 }
